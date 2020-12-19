@@ -20,13 +20,12 @@ class Report(db.Model):
     title = db.Column(db.String(50))
     ticker = db.Column(db.String(4))
     date = db.Column(db.DateTime(), default=datetime.utcnow)
-    sector = db.Column(db.String(21))
-    sectorInfo = db.relationship('Team', backref='sector', lazy='dynamic')
-
+    team = db.Column(db.String(21),db.ForeignKey('team.name'))
 
 class Team(db.Model):
     name = db.Column(db.String)
-    manager = db.Column(db.String(8), db.ForeignKey('report.username'))
+    manager = db.Column(db.String(8))
+    reports = db.relationship('Report', backref='team', lazy='dynamic')
 
 
 @app.route('/')
