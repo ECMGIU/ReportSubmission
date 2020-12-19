@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request, url_for, redirect
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
@@ -23,6 +23,9 @@ class Report(db.Model):
     date = db.Column(db.DateTime(), default=datetime.utcnow)
     team_id = db.Column(db.Integer, db.ForeignKey('team.name'))
 
+    def __repr__(self):
+        return f'<Report {self.title} by {self.username}>'
+
 
 class Team(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -31,11 +34,30 @@ class Team(db.Model):
     color = db.Column(db.String(12))
     reports = db.relationship('Report', backref='team', lazy='dynamic')
 
+    def __repr__(self):
+        return f'<Team {self.name}>'
+
 
 @app.route('/')
 def list_reports():
     reports = Report.query.all()
-    return render_template('list_reports.html', reports=reports)
+    teams = Team.query.all()
+    return render_template(
+        'list_reports.html',
+        reports=reports,
+        teams=teams
+    )
+
+
+@app.route('/new', methods=['POST'])
+def new_report():
+    fields = ['username', 'title', 'ticker', 'team_id']
+    r = Report(**{field: request.form[field] for field in fields})
+
+    db.session.add(r)
+    db.session.commit()
+
+    return redirect(url_for('list_reports'))
 
 
 if __name__ in '__main__':
