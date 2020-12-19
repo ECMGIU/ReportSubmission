@@ -30,13 +30,13 @@ def list_reports():
             'ticker': 'AGCO',
             'title': 'Opportunities in AgTech',
             'username': 'wbfletch',
-            'url': 'https://wadeflet.ch'
+            'url': 'https://wadefletcher.com'
         },
         {
             'ticker': 'INDA',
             'title': 'Indian Tech poised for major gains',
             'username': 'wbfletch',
-            'url': 'https://wadeflet.ch'
+            'url': 'https://wadefletcher.com'
         }
     ]
     return render_template('list_reports.html', reports=reports)
