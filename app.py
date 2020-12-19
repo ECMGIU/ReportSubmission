@@ -16,10 +16,17 @@ migrate = Migrate(app, db)
 
 class Report(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String())
-    title = db.Column(db.String())
+    username = db.Column(db.String(8))
+    title = db.Column(db.String(50))
     ticker = db.Column(db.String(4))
-    date = db.Column(db.DateTime())
+    date = db.Column(db.DateTime(), default=datetime.utcnow)
+    sector = db.Column(db.String(21))
+    sectorInfo = db.relationship('Team', backref='sector', lazy='dynamic')
+
+
+class Team(db.Model):
+    name = db.Column(db.String)
+    manager = db.Column(db.String(8), db.ForeignKey('report.username'))
 
 
 @app.route('/')
