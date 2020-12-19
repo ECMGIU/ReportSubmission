@@ -20,4 +20,4 @@ def index():
 
 
 if __name__ in '__main__':
-    app.run(DEBUG=True)
+    app.run()
