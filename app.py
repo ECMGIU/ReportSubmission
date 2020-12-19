@@ -5,6 +5,8 @@ from flask import Flask, render_template, request, url_for, redirect
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
+from .upload import *
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 
@@ -66,6 +68,11 @@ def new_report():
     db.session.commit()
 
     return redirect(url_for('list_reports'))
+
+
+@app.route('/', methods=["POST"]) #wade do your magic here
+def something():
+    pass
 
 
 if __name__ in '__main__':
