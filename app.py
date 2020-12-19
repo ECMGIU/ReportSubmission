@@ -27,7 +27,7 @@ class Report(db.Model):
 
 class Team(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
+    name = db.Column(db.String, unique=True)
     manager = db.Column(db.String(8))
     color = db.Column(db.String(12))
     reports = db.relationship('Report', backref='team', lazy='dynamic')
