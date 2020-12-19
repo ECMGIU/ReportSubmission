@@ -48,7 +48,7 @@ class Report(db.Model):
     date = db.Column(db.DateTime(), default=datetime.utcnow)
     downloads = db.Column(db.Integer)
     url = db.Column(db.String)
-    team_id = db.Column(db.Integer, db.ForeignKey('team.name'))
+    team_id = db.Column(db.Integer, db.ForeignKey('team.id'))
 
     def __repr__(self):
         return f'<Report {self.title} by {self.username}>'
