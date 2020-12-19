@@ -1,11 +1,31 @@
+<!--suppress CssUnknownTarget -->
 <html lang="en">
 <head>
     <title>{% block title %}{% endblock %} - ECMG Reports</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     {% block head %}{% endblock %}
+    <style>
+        @import url('https://rsms.me/inter/inter.css');
+
+        html {
+            font-family: 'Inter', sans-serif;
+        }
+
+        @supports (font-variation-settings: normal) {
+            html {
+                font-family: 'Inter var', sans-serif;
+            }
+        }
+    </style>
 </head>
-<body>
+<nav class="px-2 w-full absolute bottom-0 bg-gray-900 text-gray-400 font-semibold">
+    Home
+</nav>
+<body class="antialiased bg-gray-50 overscroll-none text-gray-900">
 {% block content %}
 {% endblock %}
 </body>
+<footer class="px-2 w-full absolute bottom-0 bg-gray-900 text-gray-400 text-right font-semibold">
+    v1.2
+</footer>
 </html>
