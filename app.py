@@ -3,7 +3,7 @@ from datetime import datetime
 
 from flask import Flask, render_template
 from flask_migrate import Migrate
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy, desc
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
@@ -21,6 +21,7 @@ class Report(db.Model):
     title = db.Column(db.String(50))
     ticker = db.Column(db.String(4))
     date = db.Column(db.DateTime(), default=datetime.utcnow)
+    downloads = db.Column(db.Integer)
     team_id = db.Column(db.Integer, db.ForeignKey('team.name'))
 
 
@@ -34,7 +35,9 @@ class Team(db.Model):
 
 @app.route('/')
 def list_reports():
-    reports = Report.query.all()
+    reports = Report.query(Report).order_by(sqlalchemy.sql.expression.desc(Report.date))
+    if path == 'downloads':
+        reports = Report.query(Report).order_by(sqlalchemy.sql.expression.desc(Report.downloads))
     return render_template('list_reports.html', reports=reports)
 
 
