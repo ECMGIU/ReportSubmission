@@ -19,8 +19,23 @@ class Report(db.Model):
 
 
 @app.route('/')
-def index():
-    return render_template('index.html')
+def list_reports():
+    # reports will be replaced with a database query eventually
+    reports = [
+        {
+            'ticker': 'AGCO',
+            'title': 'Opportunities in AgTech',
+            'username': 'wbfletch',
+            'url': 'https://wadeflet.ch'
+        },
+        {
+            'ticker': 'INDA',
+            'title': 'Indian Tech poised for major gains',
+            'username': 'wbfletch',
+            'url': 'https://wadeflet.ch'
+        }
+    ]
+    return render_template('list_reports.html', reports=reports)
 
 
 if __name__ in '__main__':
