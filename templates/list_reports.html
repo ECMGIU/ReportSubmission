@@ -3,9 +3,19 @@
 {% block title %}All Reports{% endblock %}
 
 {% block content %}
-    <ul>
-    {% for report in reports %}
-        <li><a href="{{ report.url }}">{{ report.ticker }} - {{ report.title }}</a></li>
-    {% endfor %}
-    </ul>
+    <div class="max-w-3xl mx-auto">
+        <div class="border border-b-0 border-black">
+            {% for report in reports %}
+                <a href="{{ report.url }}" class="flex-block bg-white p-2 border-black border-b hover:bg-gray-100">
+                    <div class="text-xl leading-tight">
+                        <span class="font-semibold">[{{ report.ticker }}]</span>
+                        {{ report.title }}
+                    </div>
+                    <div class="text-gray-700 text-sm font-medium">
+                        {{ report.username }} // {{ report.date }}
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
