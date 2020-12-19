@@ -5,6 +5,8 @@ from flask import Flask, render_template
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy, desc
 
+from .upload import *
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 
@@ -39,6 +41,11 @@ def list_reports():
     if path == 'downloads':
         reports = Report.query(Report).order_by(sqlalchemy.sql.expression.desc(Report.downloads))
     return render_template('list_reports.html', reports=reports)
+
+
+@app.route('/', methods=["POST"]) #wade do your magic here
+def something():
+    pass
 
 
 if __name__ in '__main__':
