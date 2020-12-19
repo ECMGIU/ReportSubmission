@@ -13,7 +13,7 @@ teams = [
     Team(name='International Equity', manager='spsahoo', color='yellow'),
     Team(name='Sustainable Investing', manager='madamann', color='green'),
     Team(name='Commodities', manager='sahmehta', color='purple'),
-    Team(name='Real Estate', manager='evanhunt', color='orange'),
+    Team(name='Real Estate', manager='evanhunt', color='pink'),
     Team(name='Macro Research', manager='ypande', color='blue')
 ]
 
@@ -26,7 +26,8 @@ reports = [
         title=fake.sentence(7),
         ticker=fake.pystr(4, 4).upper(),
         date=fake.date_this_month(),
-        team=db.session.query(Team)[random.randrange(0, db.session.query(Team).count()) ]
+        downloads=fake.pyint(0, 100),
+        team=db.session.query(Team)[random.randrange(0, db.session.query(Team).count())]
     )
     for x in range(NUM_REPORTS)
 ]
