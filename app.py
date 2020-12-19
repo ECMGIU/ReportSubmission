@@ -21,7 +21,8 @@ class Report(db.Model):
     title = db.Column(db.String(50))
     ticker = db.Column(db.String(4))
     date = db.Column(db.DateTime(), default=datetime.utcnow)
-    team = db.Column(db.String(21),db.ForeignKey('team.name'))
+    team = db.Column(db.String(), db.ForeignKey('team.name'))
+
 
 class Team(db.Model):
     name = db.Column(db.String)
