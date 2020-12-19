@@ -16,10 +16,10 @@ migrate = Migrate(app, db)
 
 class Report(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(), index=True)
-    title = db.Column(db.String(), index=True)
-    ticker = db.Column(db.String(), index=True)
-    date = db.Column(db.String(), index=True)
+    username = db.Column(db.String())
+    title = db.Column(db.String())
+    ticker = db.Column(db.String(4))
+    date = db.Column(db.DateTime())
 
 
 @app.route('/')
