@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="flex items-start">
-        <div class="max-w-3xl flex flex-col h-screen pt-12">
+        <div class="mx-auto max-w-3xl flex flex-col h-screen pt-12">
             <div class="border border-black border-b-0 p-2 pb-1 space-x-1">
                 <a href="" class="inline-flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24"
@@ -26,7 +26,7 @@
                 </a>
             </div>
 
-            <a href=""
+            <div id="open-modal"
                class="border border-b-0 bg-gray-200 font-medium border-black px-2 py-4 inline-flex items-center w-full hover:bg-gray-300 text-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-5 h-5 mr-1" viewBox="0 0 24 24"
                      stroke="currentColor">
@@ -34,7 +34,7 @@
                           d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                 </svg>
                 Upload a New Report
-            </a>
+            </div>
 
             <div class="border border-b-0 border-black overflow-y-scroll flex-1 pb-6">
                 {% for report in reports %}
@@ -54,21 +54,20 @@
                 {% endfor %}
             </div>
         </div>
-
     </div>
 
     <div id="modal"
-         class="fixed left-0 top-0 w-screen h-screen bg-black bg-opacity-75 flex items-center justify-center">
+         class="hidden fixed left-0 top-0 w-screen h-screen bg-black bg-opacity-75 flex items-center justify-center">
         <div class="bg-white border-black border">
-            <div class="mb-2 bg-gray-300 p-2 text-lg flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-5 h-5 mr-1" viewBox="0 0 24 24"
+            <div class="mb-1 bg-gray-300 px-2 py-3 text-lg flex items-center border-b border-black">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-5 h-5 mr-2" viewBox="0 0 24 24"
                      stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                           d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                 </svg>
                 Upload a New Report
             </div>
-            <form id="create" action="{{ url_for('new_report') }}" method="post"
+            <form id="create" action="{{ url_for('new_report') }}" method="post" enctype="multipart/form-data"
                   class="space-y-2 p-4">
                 <input type="text" name="username"
                        class="w-full block bg-gray-300 border border-black px-1 focus:outline-none"
@@ -84,7 +83,7 @@
                         <option value="{{ team.id }}">{{ team.name }}</option>
                     {% endfor %}
                 </select>
-                <input type="file" accept=".pdf">
+                <input type="file" name="file" accept=".pdf">
             </form>
             <button form="create" type="submit"
                     class="text-left p-2 pl-4 bg-gray-300 font-medium inline-block mt-2 w-full tracking-wide border-black border-t">
@@ -92,4 +91,24 @@
             </button>
         </div>
     </div>
+
+    <script>
+        // Get the modal
+        const modal = document.getElementById('modal');
+
+        // Get the button that opens the modal
+        const btn = document.getElementById("open-modal");
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function () {
+            modal.style.display = "flex";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 {% endblock %}
