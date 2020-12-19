@@ -12,7 +12,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlit
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+migrate = Migrate(app, db, render_as_batch=True)
 
 
 class Report(db.Model):
@@ -21,35 +21,20 @@ class Report(db.Model):
     title = db.Column(db.String(50))
     ticker = db.Column(db.String(4))
     date = db.Column(db.DateTime(), default=datetime.utcnow)
-    team = db.Column(db.String(), db.ForeignKey('team.name'))
+    team_id = db.Column(db.Integer, db.ForeignKey('team.name'))
 
 
 class Team(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     manager = db.Column(db.String(8))
+    color = db.Column(db.String(12))
     reports = db.relationship('Report', backref='team', lazy='dynamic')
 
 
 @app.route('/')
 def list_reports():
-    # reports will be replaced with a database query eventually
-    reports = [
-        {
-            'ticker': 'AGCO',
-            'title': 'Opportunities in AgTech',
-            'username': 'wbfletch',
-            'url': 'https://wadefletcher.com',
-            'date': datetime.now()
-        },
-        {
-            'ticker': 'INDA',
-            'title': 'Indian Tech poised for major gains',
-            'username': 'wbfletch',
-            'url': 'https://wadefletcher.com',
-            'date': datetime.now()
-        }
-    ]
+    reports = Report.query.all()
     return render_template('list_reports.html', reports=reports)
 
 

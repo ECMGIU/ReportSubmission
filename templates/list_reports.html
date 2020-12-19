@@ -3,16 +3,50 @@
 {% block title %}All Reports{% endblock %}
 
 {% block content %}
-    <div class="max-w-3xl mx-auto">
-        <div class="border border-b-0 border-black">
+    <div class="max-w-3xl mx-auto flex flex-col h-screen pt-12">
+        <div class="border border-black border-b-0 p-2 pb-1 space-x-1">
+            <a href="" class="inline-flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24"
+                     stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Newest
+            </a>
+            <a href="" class="inline-flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24"
+                     stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"></path>
+                </svg>
+                Top
+            </a>
+        </div>
+
+        <a href=""
+           class="border border-b-0 bg-gray-200 font-medium border-black px-2 py-4 inline-flex items-center w-full hover:bg-gray-300 text-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-5 h-5 mr-1" viewBox="0 0 24 24"
+                 stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            Upload a New Report
+        </a>
+
+        <div class="border border-b-0 border-black overflow-y-scroll flex-1 pb-6">
             {% for report in reports %}
-                <a href="{{ report.url }}" class="flex-block bg-white p-2 border-black border-b hover:bg-gray-100">
-                    <div class="text-xl leading-tight">
-                        <span class="font-semibold">[{{ report.ticker }}]</span>
-                        {{ report.title }}
-                    </div>
-                    <div class="text-gray-700 text-sm font-medium">
-                        {{ report.username }} // {{ report.date }}
+                <a href="{{ report.url }}" class="flex items-stretch bg-white border-black border-b hover:bg-gray-100">
+                    <div class="w-2 bg-{{ report.team.color }}-600 border-black border-r"></div>
+                    <div class="p-2">
+                        <div class="text-xl leading-tight font-medium">
+                            [{{ report.ticker }}]
+                            {{ report.title }}
+                        </div>
+                        <div class="text-gray-700 text-sm font-medium">
+                            {{ report.username }} // {{ report.date }}
+                        </div>
                     </div>
                 </a>
             {% endfor %}

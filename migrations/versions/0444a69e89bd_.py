@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: a2718421b221
+Revision ID: 0444a69e89bd
 Revises: 
-Create Date: 2020-12-19 13:39:14.534989
+Create Date: 2020-12-19 14:46:48.865601
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'a2718421b221'
+revision = '0444a69e89bd'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,6 +22,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=True),
     sa.Column('manager', sa.String(length=8), nullable=True),
+    sa.Column('color', sa.String(length=12), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('report',
@@ -30,8 +31,8 @@ def upgrade():
     sa.Column('title', sa.String(length=50), nullable=True),
     sa.Column('ticker', sa.String(length=4), nullable=True),
     sa.Column('date', sa.DateTime(), nullable=True),
-    sa.Column('team', sa.String(), nullable=True),
-    sa.ForeignKeyConstraint(['team'], ['team.name'], ),
+    sa.Column('team_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['team_id'], ['team.name'], ),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

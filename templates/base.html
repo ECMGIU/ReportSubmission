@@ -16,16 +16,23 @@
                 font-family: 'Inter var', sans-serif;
             }
         }
+
+        html {
+            font-family: Arial, serif;
+        }
     </style>
 </head>
-<nav class="px-2 w-full absolute bottom-0 bg-gray-900 text-gray-400 font-semibold">
-    Home
+<nav class="flex items-center p-3 w-full absolute top-0 bg-black bg-opacity-90 text-gray-200">
+    <div class="font-semibold flex-1 text-xl">ECMG Reports</div>
+    <a href="#" class="text-md">login</a>
 </nav>
-<body class="antialiased bg-gray-50 overscroll-none text-gray-900">
+
+<body class="antialiased overscroll-none text-gray-900">
 {% block content %}
 {% endblock %}
 </body>
-<footer class="px-2 w-full absolute bottom-0 bg-gray-900 text-gray-400 text-right font-semibold">
+
+<footer class="px-2 w-full absolute bottom-0 bg-black bg-opacity-90 text-gray-300 text-right font-medium">
     v1.2
 </footer>
 </html>
