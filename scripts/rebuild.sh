@@ -5,7 +5,7 @@ flask db init
 flask db migrate
 flask db upgrade
 
-git add .
+git add migrations/
 git commit -m 'rebuild migrations'
 git push origin main
 
