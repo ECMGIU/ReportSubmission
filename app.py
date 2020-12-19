@@ -14,6 +14,10 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 
+class Report(db.Model):
+    pass
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
