@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 from flask import Flask, render_template
 from flask_migrate import Migrate
@@ -30,13 +31,15 @@ def list_reports():
             'ticker': 'AGCO',
             'title': 'Opportunities in AgTech',
             'username': 'wbfletch',
-            'url': 'https://wadefletcher.com'
+            'url': 'https://wadefletcher.com',
+            'date': datetime.now()
         },
         {
             'ticker': 'INDA',
             'title': 'Indian Tech poised for major gains',
             'username': 'wbfletch',
-            'url': 'https://wadefletcher.com'
+            'url': 'https://wadefletcher.com',
+            'date': datetime.now()
         }
     ]
     return render_template('list_reports.html', reports=reports)
