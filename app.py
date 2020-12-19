@@ -21,6 +21,7 @@ class Report(db.Model):
     title = db.Column(db.String(50))
     ticker = db.Column(db.String(4))
     date = db.Column(db.DateTime(), default=datetime.utcnow)
+    downloads = db.Column(db.Integer)
     team_id = db.Column(db.Integer, db.ForeignKey('team.name'))
 
     def __repr__(self):
@@ -40,7 +41,14 @@ class Team(db.Model):
 
 @app.route('/')
 def list_reports():
-    reports = Report.query.all()
+    sort = request.args.get('sort')
+    if sort == 'downloads':
+        reports = Report.query.order_by(Report.downloads.desc())
+    else:
+        reports = Report.query.order_by(Report.date.desc())
+
+    print(sort)
+
     teams = Team.query.all()
     return render_template(
         'list_reports.html',
