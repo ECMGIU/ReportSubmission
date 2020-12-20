@@ -3,8 +3,8 @@
 {% block title %}All Reports{% endblock %}
 
 {% block content %}
-    <div class="flex items-start">
-        <div class="mx-auto max-w-3xl flex flex-col h-screen pt-12">
+    <div class="flex items-start w-full">
+        <div class="mx-auto max-w-2xl w-full flex flex-col h-screen pt-12">
             <div class="border border-black border-b-0 p-2 pb-1 space-x-1">
                 <a href="" class="inline-flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24"
@@ -27,7 +27,7 @@
             </div>
 
             <div id="open-modal"
-               class="border border-b-0 bg-gray-200 font-medium border-black px-2 py-4 inline-flex items-center w-full hover:bg-gray-300 text-lg">
+                 class="border border-b-0 bg-gray-200 font-medium border-black px-2 py-4 inline-flex items-center w-full hover:bg-gray-300 text-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-5 h-5 mr-1" viewBox="0 0 24 24"
                      stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -51,6 +51,10 @@
                             </div>
                         </div>
                     </a>
+                {% else %}
+                    <div class="w-full h-56 flex items-center justify-center italic">
+                        No reports yet.
+                    </div>
                 {% endfor %}
             </div>
         </div>
